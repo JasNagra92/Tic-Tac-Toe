@@ -17,17 +17,19 @@ const gameObj = (function () {
 };
 
   const startGame = (name, marker) => {
-    let player = playerGenerator(name, marker);
-    let turn = "player";
+    let player1 = playerGenerator(name, marker);
+    let turn = "player1";
     const playarea = document.getElementById("playarea");
     playarea.addEventListener("click", function (e) {
-      if (turn == "player") {
-        e.target.innerText = player.marker;
-
-        _gameboard[`${e.target.dataset.square}`] = player.marker
-
-        turn = "cpu";
-
+      if (turn == "player1") {
+        e.target.innerText = player1.marker;
+        _gameboard[`${e.target.dataset.square}`] = player1.marker;
+        turn = "player2";
+      } 
+      if (turn == "player2"){
+        e.target.innerText = player2.marker;
+        _gameboard[`${e.target.dataset.square}`] = player2.marker;
+        turn = "player1"
       }
     });
   };
