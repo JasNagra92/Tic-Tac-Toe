@@ -1,0 +1,14 @@
+body{
+    display: flex;
+    justify-content: center;
+}
+#playarea{
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+    grid-template-rows: repeat(3, 200px);
+    border: 2px solid black;
+    width: 600px;
+    height: 600px;
+    align-items: center;
+    justify-items: center;
+}
