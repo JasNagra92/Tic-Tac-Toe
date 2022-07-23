@@ -9,6 +9,10 @@ body{
     border: 2px solid black;
     width: 600px;
     height: 600px;
+}
+.gamesquare{
+    display: flex;
+    justify-content: center;
     align-items: center;
-    justify-items: center;
+    font-size: 5rem;
 }
