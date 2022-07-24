@@ -92,11 +92,9 @@
     playarea.addEventListener("click", function (e) {
       if (turn == "player1" && e.target.innerText == player2.marker) {
         alert("must pick empty square");
-        turn = "player1";
       } 
       else if (turn == "player1" && e.target.innerText == player1.marker) {
         alert("You already place a marker here");
-        turn = "player1";
       } 
       else if (turn == "player1") {
         e.target.innerText = player1.marker;
@@ -108,11 +106,9 @@
       } 
       else if (turn == "player2" && e.target.innerText == player2.marker) {
         alert("You already place a marker here");
-        turn = "player2";
       } 
       else if (turn == "player2" && e.target.innerText == player1.marker) {
         alert("must pick empty square");
-        turn = "player2";
       } 
       else if (turn == "player2") {
         e.target.innerText = player2.marker;
