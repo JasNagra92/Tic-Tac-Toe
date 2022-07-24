@@ -3,21 +3,19 @@
   let turn = "player1";
   let movesPlayed = 0;
   
-  (function _render() {
+  
+  const _render = function() {
     for (let i = 0; i < 9; i++) {
       let box = document.getElementById(`a${i}`);
       box.innerText = '';
       box.dataset.square = i;
     }
-  })();
+  };
+  _render();
 
   const restartGame = function(){
     _gameboard = [];
-    for (let i = 0; i < 9; i++) {
-      let box = document.getElementById(`a${i}`);
-      box.innerText = '';
-      box.dataset.square = i;
-    };
+    _render();
     movesPlayed = 0;
     document.getElementById("myForm").reset();
     turn = 'player1'
