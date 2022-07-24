@@ -1,11 +1,11 @@
 (function () {
-  let _gameboard = ["", "", "", "", "", "", "", "", ""];
+  let _gameboard = [];
   let turn = "player1";
-
+  let movesPlayed = 0;
   (function _render() {
     for (let i = 0; i < 9; i++) {
       let box = document.getElementById(`a${i}`);
-      box.innerText = _gameboard[i];
+      box.innerText = '';
       box.dataset.square = i;
     }
   })();
@@ -60,6 +60,8 @@
       (_gameboard[2] == "O" && _gameboard[4] == "O" && _gameboard[6] == "O")
     ) {
       alert(`${player2name} you win`);
+    } else if (movesPlayed == 9){
+      alert('tie game')
     }
   };
 
@@ -85,6 +87,7 @@
         e.target.innerText = player1.marker;
         _gameboard[`${e.target.dataset.square}`] = player1.marker;
         turn = "player2";
+        movesPlayed++
         _checkWin(player1.name, player2.name);
       } 
       else if (turn == "player2" && e.target.innerText == player2.marker) {
@@ -99,6 +102,7 @@
         e.target.innerText = player2.marker;
         _gameboard[`${e.target.dataset.square}`] = player2.marker;
         turn = "player1";
+        movesPlayed++
         _checkWin();
       }
     });
