@@ -8,7 +8,7 @@ body{
     display: grid;
     grid-template-columns: repeat(3, 200px);
     grid-template-rows: repeat(3, 200px);
-    border: 2px solid black;
+    /* border: 2px solid black; */
     width: 600px;
     height: 600px;
 }
@@ -17,8 +17,21 @@ body{
     justify-content: center;
     align-items: center;
     font-size: 5rem;
+    border: 1px solid black;
 }
 #options{
     text-align: center;
     margin-top: 10px;
+}
+#a0, #a1, #a2{
+    border-top: none;
+}
+#a6, #a7, #a8{
+    border-bottom: none;
+}
+#a0, #a3, #a6{
+    border-left: none;
+}
+#a2, #a5, #a8{
+    border-right: none;
 }
