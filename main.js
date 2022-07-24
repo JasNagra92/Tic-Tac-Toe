@@ -16,7 +16,7 @@ const gameObj = (function () {
     };
   };
 
-  const players = document
+    document
     .getElementById("startGame")
     .addEventListener("click", function () {
       const player1name = document.getElementById("player1name").value;
@@ -27,7 +27,11 @@ const gameObj = (function () {
       const player2marker = document.querySelector(
         `input[name="marker2"]:checked`
       ).value;
-      startGame(player1name, player1marker, player2name, player2marker);
+      if (player1name == ""){alert('player 1 name cannot be empty')}
+      else if (player2name == ""){alert('player 2 name cannot be empty')}
+      else if (player1marker == player2marker){alert('players cannot have same marker')}
+      else{
+      startGame(player1name, player1marker, player2name, player2marker)};
     });
 
   const startGame = (
