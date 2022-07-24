@@ -67,12 +67,24 @@ const gameObj = (function () {
     let player2 = playerGenerator(player2name, player2marker);
     const playarea = document.getElementById("playarea");
     playarea.addEventListener("click", function (e) {
-      if (turn == "player1") {
+      if (turn == "player1" && e.target.innerText == player2.marker){
+        alert('must pick empty square');
+        turn = "player1"
+      } else if(turn == 'player1' && e.target.innerText == player1.marker){
+        alert('You already place a marker here');
+        turn = "player1"
+      } else if(turn == 'player1'){
         e.target.innerText = player1.marker;
         _gameboard[`${e.target.dataset.square}`] = player1.marker;
         turn = "player2";
         checkWin(player1.name,player2.name);
-      } else if (turn == "player2") {
+      } else if (turn == "player2" && e.target.innerText == player2.marker){
+        alert('You already place a marker here');
+        turn = "player2";
+      } else if (turn == 'player2' && e.target.innerText == player1.marker){
+        alert('must pick empty square');
+        turn = "player2"
+      } else if (turn == 'player2'){
         e.target.innerText = player2.marker;
         _gameboard[`${e.target.dataset.square}`] = player2.marker;
         turn = "player1";
