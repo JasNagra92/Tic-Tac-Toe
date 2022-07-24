@@ -2,6 +2,7 @@
   let _gameboard = [];
   let turn = "player1";
   let movesPlayed = 0;
+  
   (function _render() {
     for (let i = 0; i < 9; i++) {
       let box = document.getElementById(`a${i}`);
@@ -9,6 +10,18 @@
       box.dataset.square = i;
     }
   })();
+
+  const restartGame = function(){
+    _gameboard = [];
+    for (let i = 0; i < 9; i++) {
+      let box = document.getElementById(`a${i}`);
+      box.innerText = '';
+      box.dataset.square = i;
+    };
+    movesPlayed = 0;
+    document.getElementById("myForm").reset();
+    turn = 'player1'
+  }
 
   const _playerGenerator = (name, marker) => {
     return {
@@ -34,6 +47,7 @@
       alert("players cannot have same marker");
     } else {
       _startGame(player1name, player1marker, player2name, player2marker);
+      document.getElementById("startGame").disabled = true;
     }
   });
 
@@ -49,6 +63,7 @@
       (_gameboard[2] == "X" && _gameboard[4] == "X" && _gameboard[6] == "X")
     ) {
       alert(`${player1name} you win`);
+      restartGame()
     } else if (
       (_gameboard[0] == "O" && _gameboard[1] == "O" && _gameboard[2] == "O") ||
       (_gameboard[3] == "O" && _gameboard[4] == "O" && _gameboard[5] == "O") ||
@@ -60,8 +75,10 @@
       (_gameboard[2] == "O" && _gameboard[4] == "O" && _gameboard[6] == "O")
     ) {
       alert(`${player2name} you win`);
+      restartGame()
     } else if (movesPlayed == 9){
-      alert('tie game')
+      alert('tie game');
+      restartGame()
     }
   };
 
@@ -87,7 +104,8 @@
         e.target.innerText = player1.marker;
         _gameboard[`${e.target.dataset.square}`] = player1.marker;
         turn = "player2";
-        movesPlayed++
+        movesPlayed++;
+        console.log(_gameboard);
         _checkWin(player1.name, player2.name);
       } 
       else if (turn == "player2" && e.target.innerText == player2.marker) {
