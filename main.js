@@ -49,36 +49,31 @@
     }
   });
 
-  _checkWin = function (player1name, player2name) {
-    if (
-      (_gameboard[0] == "X" && _gameboard[1] == "X" && _gameboard[2] == "X") ||
-      (_gameboard[3] == "X" && _gameboard[4] == "X" && _gameboard[5] == "X") ||
-      (_gameboard[6] == "X" && _gameboard[7] == "X" && _gameboard[8] == "X") ||
-      (_gameboard[0] == "X" && _gameboard[3] == "X" && _gameboard[6] == "X") ||
-      (_gameboard[1] == "X" && _gameboard[4] == "X" && _gameboard[7] == "X") ||
-      (_gameboard[2] == "X" && _gameboard[5] == "X" && _gameboard[8] == "X") ||
-      (_gameboard[0] == "X" && _gameboard[4] == "X" && _gameboard[8] == "X") ||
-      (_gameboard[2] == "X" && _gameboard[4] == "X" && _gameboard[6] == "X")
-    ) {
-      alert(`${player1name} you win`);
-      restartGame()
-    } else if (
-      (_gameboard[0] == "O" && _gameboard[1] == "O" && _gameboard[2] == "O") ||
-      (_gameboard[3] == "O" && _gameboard[4] == "O" && _gameboard[5] == "O") ||
-      (_gameboard[6] == "O" && _gameboard[7] == "O" && _gameboard[8] == "O") ||
-      (_gameboard[0] == "O" && _gameboard[3] == "O" && _gameboard[6] == "O") ||
-      (_gameboard[1] == "O" && _gameboard[4] == "O" && _gameboard[7] == "O") ||
-      (_gameboard[2] == "O" && _gameboard[5] == "O" && _gameboard[8] == "O") ||
-      (_gameboard[0] == "O" && _gameboard[4] == "O" && _gameboard[8] == "O") ||
-      (_gameboard[2] == "O" && _gameboard[4] == "O" && _gameboard[6] == "O")
-    ) {
-      alert(`${player2name} you win`);
-      restartGame()
-    } else if (movesPlayed == 9){
-      alert('tie game');
-      restartGame()
-    }
-  };
+
+  _checkWin2 = function(player1,player2){
+      let winningCombinations = [
+        [0,1,2],
+        [3,4,5],
+        [6,7,8],
+        [0,3,6],
+        [1,4,7],
+        [2,5,8],
+        [0,4,8],
+        [2,4,6]
+      ];
+      for (let i = 0; i < 8; i++){
+        let winCondition = winningCombinations[i]       
+            let a = _gameboard[winCondition[0]];
+            let b = _gameboard[winCondition[1]];
+            let c = _gameboard[winCondition[2]];
+            if (a != undefined && a === b && b === c && a == player1.marker){
+              alert(`${player1.name} is the winner`)
+            } else if (a != undefined && a === b && b === c && a == player2.marker){
+              alert(`${player2.name} is the winner`)
+            }
+      }
+
+  }
 
   const _startGame = (
     player1name,
@@ -101,8 +96,7 @@
         _gameboard[`${e.target.dataset.square}`] = player1.marker;
         turn = "player2";
         movesPlayed++;
-        console.log(_gameboard);
-        _checkWin(player1.name, player2.name);
+        _checkWin2(player1, player2);
       } 
       else if (turn == "player2" && e.target.innerText == player2.marker) {
         alert("You already place a marker here");
@@ -115,8 +109,12 @@
         _gameboard[`${e.target.dataset.square}`] = player2.marker;
         turn = "player1";
         movesPlayed++
-        _checkWin();
+        _checkWin2(player1,player2);
       }
     });
+    return {
+      player1,
+      player2
+    }
   };
 })();
